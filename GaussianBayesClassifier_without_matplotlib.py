@@ -1,5 +1,5 @@
 import math
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 def update(ls):
     mean=sum(ls)/float(len(ls))
@@ -123,13 +123,15 @@ for line in file:
         if ans>mx:
             mx=ans
             mx_ans=key
+    print("original: "+ls[-1],"prediction: "+mx_ans)
     if mx_ans==ls[-1]:
         acc+=1
-    plt.scatter(ls[0],ls[1],c=color[ls[-1]],marker="<")
-    plt.scatter(ls[0],ls[1],c=color[mx_ans],marker=">")
+    #plt.scatter(ls[0],ls[1],c=color[ls[-1]],marker="<")
+    #plt.scatter(ls[0],ls[1],c=color[mx_ans],marker=">")
     total_input+=1
 
 print("Accuracy: ",100*acc/total_input,"%",sep="")
-plt.show()
+#plt.show()
 
 """-----------------Zone Ended--------------------------"""
+
