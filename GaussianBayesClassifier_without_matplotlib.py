@@ -1,4 +1,4 @@
-import math
+import math,sys
 #import matplotlib.pyplot as plt
 
 def update(ls):
@@ -14,27 +14,31 @@ def calculate_ans(mean,sigma,val):
 
 """--------------------Preparing for input-----------------------"""
 
+taken=sys.argv[1:]
+if len(taken)==0 :
+    show="Give\nNeeded: (1)-Input File Path/Name\n"
+    show+="Optional: (2)-No. of features needed for prediction\n"
+    show+="Optional: (3)-Give file for prediction task otherwise it will use the input file\n"
+    show+="for measure its accuracy\n\n"
+    show+="Note: input should be separated by space( )\n\n"
+    show+="Note: both input file should contain data in following manner:\n"
+    show+="\t\t\tfeature1,feature2[,feature3,...],outcome\n\n\n"
+    show+="and file input should be seperated by comma(,) \n"
+    print(show)
+    in_rep="Input in manner : (1) (2) (3)\n"
+    taken=input(in_rep).split()
 
-
-show="Give\nNeeded: (1)-Input File Path/Name, (2)-No. of features needed for prediction\n"
-show+="Optional: (3)-Give file for prediction task otherwise it will use the input file\n"
-show+="for measure its accuracy\n\n"
-show+="here input should be separated by space( )\n\n"
-show+="Note: both input file should contain data in following manner:\n"
-show+="\t\t\tfeature1,feature2[,feature3,...],outcome\n\n\n"
-show+="and file input should be seperated by comma(,) \n"
-print(show)
-in_rep="Input in manner : (1) (2) (3)\n  "
-taken=input(in_rep).split()
 #taken=["iris.data","4"]
 fname1=taken[0]
-fname2=fname1
-if len(taken)==3:
-    fname2=taken[-1]
 file = open(fname1,"r")
 in_var = len(file.readline().split(','))-1
 file.seek(0)
-features=min(int(taken[1]),in_var)
+fname2=fname1
+features=in_var
+if len(taken)==3:
+    fname2=taken[-1]
+if len(taken)==2:
+    features=min(int(taken[1]),in_var)
 in_type=[]
 for i in range(in_var):
     in_type.append(float)
