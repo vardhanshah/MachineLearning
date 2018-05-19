@@ -30,13 +30,11 @@ in_var = len(file.readline().split(','))-1
 file.seek(0)
 fname2=fname1
 features=in_var
-print(len(taken))
 if len(taken)==3:
     if taken[1].isnumeric():
         features=min(int(taken[1]),in_var)
         fname2=taken[2]
     else :
-        print("fuck")
         features=min(int(taken[2]),in_var)
         fname2=taken[1]
 
