@@ -17,19 +17,11 @@ def calculate_ans(mean,sigma,val):
 
 """--------------------Preparing for input-----------------------"""
 #taken=["dataset1.csv"]
+
 taken=sys.argv[1:]
+
 if len(taken)==0 :
-    show="Give\nNeeded: (1)-Input File Path/Name\n"
-    show+="Optional: (2)-No. of features needed for prediction\n"
-    show+="Optional: (3)-Give file for prediction task otherwise it will use the input file\n"
-    show+="for measure its accuracy\n\n"
-    show+="Note: input should be separated by space( )\n\n"
-    show+="Note: both input file should contain data in following manner:\n"
-    show+="\t\t\tfeature1,feature2[,feature3,...],outcome\n\n\n"
-    show+="and file input should be seperated by comma(,) \n"
-    print(show)
-    in_rep="Input in manner : (1) (2) (3)\n"
-    taken=input(in_rep).split()
+    taken=input().split()
 
 #taken=["iris.data","4"]
 fname1=taken[0]
@@ -38,10 +30,22 @@ in_var = len(file.readline().split(','))-1
 file.seek(0)
 fname2=fname1
 features=in_var
+print(len(taken))
 if len(taken)==3:
-    fname2=taken[-1]
+    if taken[1].isnumeric():
+        features=min(int(taken[1]),in_var)
+        fname2=taken[2]
+    else :
+        print("fuck")
+        features=min(int(taken[2]),in_var)
+        fname2=taken[1]
+
 if len(taken)==2:
-    features=min(int(taken[1]),in_var)
+    if taken[1].isnumeric():
+        features=min(int(taken[1]),in_var)
+    else:
+        fname2=taken[-1]
+
 in_type=[]
 for i in range(in_var):
     in_type.append(float)
@@ -138,7 +142,7 @@ for line in file:
         for key in types.keys():
             mx_ans=key
             break
-    print("original: ",ls[-1],"prediction: ",mx_ans,total_input)
+    print("original: ",ls[-1],"prediction: ",mx_ans)
     if mx_ans==ls[-1]:
         acc+=1
 
