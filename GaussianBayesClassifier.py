@@ -1,6 +1,9 @@
 import math,sys
 import matplotlib.pyplot as plt
-
+import matplotlib.colors
+c=[]
+for name in matplotlib.colors.cnames.keys():
+    c.append(name)
 def update(ls):
     mean=sum(ls)/float(len(ls))
     sigma=0
@@ -13,6 +16,7 @@ def calculate_ans(mean,sigma,val):
 
 
 """--------------------Preparing for input-----------------------"""
+#taken=["dataset1.csv"]
 taken=sys.argv[1:]
 if len(taken)==0 :
     show="Give\nNeeded: (1)-Input File Path/Name\n"
@@ -57,7 +61,6 @@ prob={}
 count=0
 color={}
 k=0
-c=["red","blue","green"]
 
 """--------------------Zone Ended----------------------------"""
 
@@ -71,7 +74,7 @@ for line in file:
     tmp=line.split(',')
 
     ls=[ty(val) for ty,val in zip(in_type,line.split(','))]
-    if ls[-1][-1]=='\n':
+    if ls[-1][-1]=='\n' or ls[-1][-1]==' ':
         ls[-1]= ls[-1][0:-1]
     if ls[-1] in types:
         types[ls[-1]].append(ls[0:-1])
@@ -84,6 +87,7 @@ for line in file:
         #print(ls[-1])
         color[ls[-1]]=c[k]
         k+=1
+    #print(ls)
 
 """----------------------Zone Ended----------------------"""
 
@@ -91,14 +95,14 @@ for line in file:
 
 """---------------------Training Zone---------------------"""
 
-for val in prob.values():
-    val/=count
-
+for key in prob.keys():
+    prob[key]=prob[key]/count
 for key,val in types.items():
     for i in range(in_var) :
         x,y=update([x[i] for x in val])
         mean[key].append(x)
         sigma[key].append(y)
+#print(types)
 
 """---------------------Zone Ended------------------------"""
 
@@ -113,21 +117,31 @@ else:
 acc=0
 total_input=0
 for line in file:
+    if total_input>5000:
+        break
     mx_ans=""
     mx=0
     ls=[ty(val) for ty,val in zip(in_type,line.split(','))]
-    if ls[-1][-1]=='\n':
+    if ls[-1][-1]=='\n' or ls[-1][-1]==' ':
         ls[-1]= ls[-1][0:-1]
     for key in mean.keys():
         ans=1
         for i in range(features):
-            ans*=calculate_ans(mean[key][i],sigma[key][i],ls[i])
+            if sigma[key][i]!=0:
+                ans*=calculate_ans(mean[key][i],sigma[key][i],ls[i])
         ans*=prob[key]
         if ans>mx:
             mx=ans
             mx_ans=key
+
+    if mx_ans=='':
+        for key in types.keys():
+            mx_ans=key
+            break
+    print("original: ",ls[-1],"prediction: ",mx_ans,total_input)
     if mx_ans==ls[-1]:
         acc+=1
+
     plt.scatter(ls[0],ls[1],c=color[ls[-1]],marker="<")
     plt.scatter(ls[0],ls[1],c=color[mx_ans],marker=">")
     total_input+=1
