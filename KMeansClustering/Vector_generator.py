@@ -7,16 +7,16 @@ def generate(filename,vec_len,num_vecs):
             vec=[]
             for j in range(vec_len):
                 vec.append(np.random.randint(ll,ul))
-            print(len(vec),vec_len)
             for k in vec:
                 f.write(str(k) + ' ')
             f.write('\n')
-lower_limit = 1
-upper_limit = 1000
-filename = "vectors"
+ll = 1
+ul = 1000
+filename1 = "vectors"
+filename2 = "candid_vectors"
 vec_len = 2
-num_vecs = 500
-num_candid_vecs = 1000
+num_vecs = 1000
+num_candid_vecs = 3000
 
 generate('vectors',vec_len,num_vecs)
-generate('candid_vector',vec_len,num_candid_vecs)
+generate('candid_vectors',vec_len,num_candid_vecs)

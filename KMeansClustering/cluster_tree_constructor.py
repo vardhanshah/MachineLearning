@@ -7,17 +7,17 @@ no_plot=False
 try:
     import matplotlib.pyplot as plt
     import matplotlib.colors
+
+    c= []
+    bad_colors = ['whitesmoke','floralwhite','lightgoldenrodyellow','aliceblue','plum','w','lightgray','seashell','navajowhite','ivory','lemonchiffon','ghostwhite','mediumturquiose','mediumaquamarine','deeppink','white','dimgray','lightgrey','beige','honeydew','lavender','snow','linen','cornsilk','lightyellow','mintcream','lightcyan']
+
+    for name in matplotlib.colors.cnames.keys():
+        if name in bad_colors:
+            continue
+        c.append(name)
 except :
     no_plot=True
     print('No matplotlib is detected, won\'t able to plot')
-
-c= []
-bad_colors = ['whitesmoke','floralwhite','lightgoldenrodyellow','aliceblue','plum','w','lightgray','seashell','navajowhite','ivory','lemonchiffon','ghostwhite','mediumturquiose','mediumaquamarine','deeppink','white','dimgray','lightgrey','beige','honeydew','lavender','snow','linen','cornsilk','lightyellow','mintcream','lightcyan']
-
-for name in matplotlib.colors.cnames.keys():
-    if name in bad_colors:
-        continue
-    c.append(name)
 
 #reading config file
 
