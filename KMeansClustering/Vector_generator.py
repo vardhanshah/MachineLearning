@@ -1,12 +1,5 @@
 import random
 import numpy as np
-func_rand = np.random.random
-ll = 1
-ul = 1000
-filename = "vectors"
-vec_len = 2
-num_vecs = 5000
-
 def generate(filename,vec_len,num_vecs):
     with open(filename,'w') as f:
         print(vec_len,num_vecs)
@@ -18,5 +11,12 @@ def generate(filename,vec_len,num_vecs):
             for k in vec:
                 f.write(str(k) + ' ')
             f.write('\n')
-generate('vectors',2,1000)
-generate('candid_vector',2,1000)
+lower_limit = 1
+upper_limit = 1000
+filename = "vectors"
+vec_len = 2
+num_vecs = 500
+num_candid_vecs = 1000
+
+generate('vectors',vec_len,num_vecs)
+generate('candid_vector',vec_len,num_candid_vecs)
