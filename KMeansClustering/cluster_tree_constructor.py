@@ -296,13 +296,16 @@ template = 'nearest vector: {0} distance: {1} candid vector: {2}\n'
 
 total_time = 0
 
+distance_cluster = []
+
 with open(output_file,'w') as f:
     for i in range(len(candid_vectors)):
         start = time.time()
         found_vec = root.search(candid_vectors[i])
         end = time.time()
         total_time += end-start
-        f.write(template.format(str(found_vec[0]),str(distance(found_vec[0],candid_vectors[i])),str(candid_vectors[i])))
+        distance_cluster.append(distance(found_vec[0],candid_vectors[i]))
+        f.write(template.format(str(found_vec[0]),str(distance_cluster[-1]),str(candid_vectors[i])))
 
 print('searching procedure has been ended.')
 print('time taken by searching: '+str(total_time)+'s')
@@ -319,32 +322,27 @@ if ans.lower() == 'y':
     total_time = 0
 
     out_brute_file = '.ans_brute_force'
-
+    distance_brute = []
     with open(out_brute_file, 'w') as f:
         for i in range(len(candid_vectors)):
             start = time.time()
             found_vec = find_nearest(vectors, candid_vectors[i])
             end = time.time()
             total_time+=end-start
-            f.write(template.format(str(found_vec[0]), str(distance(found_vec[0], candid_vectors[i])),str(candid_vectors[i])))
+            distance_brute.append(distance(found_vec[0],candid_vectors[i]))
+            f.write(template.format(str(found_vec[0]), str(distance_brute[-1]),str(candid_vectors[i])))
 
     print('brute_force searching has been done')
     print('time taken by brute-force searching: '+str(total_time)+'s')
 
 
-    print('\n\ncomparing both files for differences')
+    print('\n\ncomparing both resultes for differences')
 
-    csf = open(output_file,'r')
-    cs = csf.read().split('\n')
-    csf.close()
-    bsf = open(out_brute_file,'r')
-    bs = bsf.read().split('\n')
-    bsf.close()
-    difference = 0
+    difference=0
 
-    for i in range(len(cs)):
-        if cs[i]!=bs[i]:
+    for i in range(len(distance_cluster)):
+        if distance_cluster[i]!=distance_brute[i]:
             difference+=1
 
     print('total number of differences: ' + str(difference))
-    print('Searching accuracy: ',str((1-(difference/len(cs)))*100) + '%')
+    print('Searching accuracy: ',str((1-(difference/len(distance_cluster)))*100) + '%')
