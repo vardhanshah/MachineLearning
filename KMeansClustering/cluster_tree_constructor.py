@@ -1,5 +1,6 @@
 import random
 import time
+import sys
 
 no_plot=False
 
@@ -28,6 +29,9 @@ with open(filename,'r') as file:
     for line in file:
         if line=='\n' or line=='' or line[0]=='#' :
             continue
+        if not '=' in line:
+            print(' \'=\' assignment operator is not found in config file\nplease format the config file properly')
+            sys.exit(0)
         k,v = line.split('=')
         rm = ['\n','\t',' ']
         for i in rm:

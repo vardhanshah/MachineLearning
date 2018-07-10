@@ -1,7 +1,7 @@
-<pre>
+Here, It is an implementation of hierarchical clustering, basically tree of clusters.
 
-Here, I have implemented hierarchical clustering, basically tree of clusters.
-Every node can have maximum number of sub-clusters defined by programmer in config file. (more on config file below !)
+It is like tree, each node(cluster) can have number of childern(sub-clusters).
+Node(cluster) qualifies to have number of childern(cluster) and maximum number of children(sub-clusters) it can have, all can be defined in config (more on config file below !).
 
 Input-Data-Set needed to be vectors, vectors of d-Dimension, where d>0 (positive number).
 
@@ -137,4 +137,3 @@ output:
 	comparing both files for differences
 	total number of differences: 43
 
-</pre>
