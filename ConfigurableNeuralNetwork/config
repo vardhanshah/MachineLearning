@@ -1,0 +1,14 @@
+Input_Filepath = IRIS.csv
+Input_Headers = false
+Input_Columns = 1-8
+Output_Filepath = IRIS.csv
+Output_Headers = false
+Output_Columns = 9
+Hidden_Layers = 8 
+Bias_Nodes = true
+Learning_Rate = 0.01
+Epochs = 1000
+Mini_Batches = 4000
+Activation_Function = relu
+classification = true
+one_hot_encoding = true

@@ -1,9 +1,9 @@
 input_file_vectors = vectors
 input_file_candid_vectors = candid_vectors
 output_file = ans_cluster
-minimum cluster size = 250
-number of sub clusters = 2
+minimum cluster size = 50
+number of sub clusters = 10
 mean plot verbose = false
-cluster plot verbose = false
+cluster plot verbose = true
 converge loop times = 1000
 optimization loop times = 1

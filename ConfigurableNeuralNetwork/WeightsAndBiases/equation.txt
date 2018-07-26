@@ -1,0 +1,11 @@
+x denotes input
+
+y denotes output
+
+w1, w2, denotes weights
+
+b1, b2, denotes biases
+
+a1 = relu(w1*x + b1)
+
+y = softmax(w2*a1 + b2)
